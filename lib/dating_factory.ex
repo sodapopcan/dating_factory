@@ -6,7 +6,7 @@ defmodule DatingFactory do
   @date ~r/\A(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s?([0-9][0-9]?)?,?\s?([0-9][0-9][0-9][0-9])?/
   @time ~r/\A([0-9][0-9]?):?([0-6][0-9])?:?([0-6][0-9])?(am|pm)/
 
-  @doc"""
+  @doc """
   Parses an English date string into a DateTime.
 
   ## Examples
@@ -33,7 +33,7 @@ defmodule DatingFactory do
   defp parse([date_or_time]) do
     cond do
       date?(date_or_time) ->
-        DateTime.new!(parse_date(date_or_time), Time.new!(0, 0, 0, 000000))
+        DateTime.new!(parse_date(date_or_time), Time.new!(0, 0, 0, 000_000))
 
       time?(date_or_time) ->
         DateTime.new!(Date.utc_today(), parse_time(date_or_time))
@@ -99,7 +99,7 @@ defmodule DatingFactory do
         hour
       end
 
-    Time.new!(hour, minute, second, 000000)
+    Time.new!(hour, minute, second, 000_000)
   end
 
   defp to_integer(""), do: 0
