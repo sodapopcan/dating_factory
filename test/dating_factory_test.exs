@@ -2,6 +2,7 @@ defmodule DatingFactoryTest do
   use ExUnit.Case
 
   import DatingFactory, only: [sigil_d: 2]
+  doctest DatingFactory
 
   def datetime(year, month, day, hour, minute, second) do
     date = Date.new!(year, month, day)

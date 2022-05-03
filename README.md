@@ -26,7 +26,7 @@ English-centric.
 ## Usage
 
 ```elixir
-iex> import DatingTime
+iex> import DatingFactory
 iex> ~d[Apr 24, 1981 - 2pm]
 ~U[1981-04-24 14:00:00.000000Z]
 iex> ~d[10:02am] # uses today's date

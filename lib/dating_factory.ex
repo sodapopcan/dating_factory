@@ -6,6 +6,19 @@ defmodule DatingFactory do
   @date ~r/\A(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s?([0-9][0-9]?)?,?\s?([0-9][0-9][0-9][0-9])?/
   @time ~r/\A([0-9][0-9]?):?([0-6][0-9])?:?([0-6][0-9])?(am|pm)/
 
+  @doc"""
+  Parses an English date string into a DateTime.
+
+  ## Examples
+
+      iex> import DatingFactory
+      iex> ~d[Apr 24, 1981 - 2pm]
+      ~U[1981-04-24 14:00:00.000000Z]
+      iex> ~d[10:02am] # uses today's date
+      ~U[2022-05-03 10:02:00.000000Z]
+      iex> ~d[Aug 23] # uses the current year but always at the beginning of the day
+      ~U[2022-08-23 00:00:00.000000Z]
+  """
   def sigil_d(string, []) do
     string
     |> String.replace(~r/\s+/, " ")
