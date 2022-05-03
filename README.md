@@ -23,6 +23,11 @@ I would also caution that using a library such as this in an open source project
 as it makes the already English-centric world of programming even more
 English-centric.
 
+## Note
+
+I just pushed this recently to have it in a repo.  I haven't even added a tag
+yet.  Things might change heavily, including the sigil.
+
 ## Usage
 
 ```elixir
