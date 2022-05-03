@@ -3,12 +3,22 @@ defmodule DTest do
 
   import D
 
+  def datetime(year, month, day, hour, minute, second) do
+    date = Date.new!(year, month, day)
+    time = Time.new!(hour, minute, second, 000000)
+
+    DateTime.new!(date, time)
+  end
+
   describe "~d/2" do
     test "parses full date" do
+      assert ~d[Apr 24, 1981 - 3:33pm] == ~U[1981-04-24T15:33:00.000000Z]
+    end
+
+    test "date without year assumes current year" do
       now = DateTime.utc_now()
 
-      assert ~d[Apr 24, 1981 - 3:33pm] == ~U[1981-04-24T15:33:00.000000Z]
-      assert ~d[Apr 24 - 3:33pm] == DateTime.new!(Date.new!(now.year, 4, 24), Time.new!(15, 33, 0, 000000))
+      assert ~d[Apr 24 - 3:33pm] == datetime(now.year, 4, 24, 15, 33, 0)
     end
   end
 
