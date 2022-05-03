@@ -37,7 +37,7 @@ defmodule D do
         hour
       end
 
-    Time.new!(hour, minute, second)
+    Time.new!(hour, minute, second, 000000)
   end
 
   defp to_integer(""), do: 0
