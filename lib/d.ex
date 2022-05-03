@@ -2,6 +2,19 @@ defmodule D do
   @date ~r/\A(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s?([0-9][0-9]?)?,?\s?([0-9][0-9][0-9][0-9])?/
   @time ~r/\A([0-9][0-9]?):?([0-6][0-9])?:?([0-6][0-9])?(am|pm)/
 
+  def sigil_d(string, []) do
+    string
+    |> String.replace(~r/\s+/, " ")
+    |> String.split(" - ")
+    |> case do
+      [date, time] ->
+        DateTime.new!(parse_date(date), parse_time(time))
+
+      _ ->
+        raise "d'oh"
+    end
+  end
+
   def parse_date(string) do
     case Regex.run(@date, string, capture: :all_but_first) do
       [month, day, year] ->

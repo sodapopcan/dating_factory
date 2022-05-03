@@ -3,6 +3,15 @@ defmodule DTest do
 
   import D
 
+  describe "~d/2" do
+    test "parses full date" do
+      now = DateTime.utc_now()
+
+      assert ~d[Apr 24, 1981 - 3:33pm] == ~U[1981-04-24T15:33:00.000000Z]
+      assert ~d[Apr 24 - 3:33pm] == DateTime.new!(Date.new!(now.year, 4, 24), Time.new!(15, 33, 0, 000000))
+    end
+  end
+
   describe "parse_date/1" do
     test "parses all sorts of dates" do
       assert parse_date("Jan 1, 2014") == Date.new!(2014, 1, 1)
