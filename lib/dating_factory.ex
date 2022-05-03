@@ -14,7 +14,6 @@ defmodule DatingFactory do
   end
 
   defp parse([date_or_time]) do
-    IO.inspect(date_or_time, label: "date_or_time")
     cond do
       date?(date_or_time) ->
         DateTime.new!(parse_date(date_or_time), Time.new!(0, 0, 0, 000000))
