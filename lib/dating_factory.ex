@@ -39,6 +39,7 @@ defmodule DatingFactory do
         DateTime.new!(Date.utc_today(), parse_time(date_or_time))
 
       true ->
+        # Gotta fix this at some point, but I'm in no rush.
         raise "Oops"
     end
   end
