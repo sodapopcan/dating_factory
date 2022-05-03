@@ -1,14 +1,32 @@
 defmodule D do
-  @date ~r/\A(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s([0-9][0-9]?),\s([0-9][0-9][0-9][0-9])/
+  @date ~r/\A(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s?([0-9][0-9]?)?,?\s?([0-9][0-9][0-9][0-9])?/
   @time ~r/\A([0-9][0-9]?):?([0-6][0-9])?:?([0-6][0-9])?(am|pm)/
 
   def parse_date(string) do
-    [month, day, year] = Regex.run(@date, string, capture: :all_but_first)
-    month = parse_month(month)
-    day = to_integer(day)
-    year = to_integer(year)
+    case Regex.run(@date, string, capture: :all_but_first) do
+      [month, day, year] ->
+        month = parse_month(month)
+        day = to_integer(day)
+        year = to_integer(year)
 
-    Date.new!(year, month, day)
+        Date.new!(year, month, day)
+
+      [month, day] ->
+        %{year: year} = DateTime.utc_now()
+        month = parse_month(month)
+        day = to_integer(day)
+
+        Date.new!(year, month, day)
+
+      [month] ->
+        %{year: year, day: day} = DateTime.utc_now()
+        month = parse_month(month)
+
+        Date.new!(year, month, day)
+
+      nil ->
+        raise "oops"
+    end
   end
 
   defp parse_month("Jan"), do: 1

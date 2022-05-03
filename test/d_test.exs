@@ -11,6 +11,12 @@ defmodule DTest do
       assert parse_date("Mar 12, 1922") == Date.new!(1922, 3, 12)
       assert parse_date("May 2, 1942") == Date.new!(1942, 5, 2)
     end
+
+    test "assumes current year when no year given" do
+      now = DateTime.utc_now()
+
+      assert parse_date("Apr 24") == Date.new!(now.year, 4, 24)
+    end
   end
 
   describe "parse_time/1" do
