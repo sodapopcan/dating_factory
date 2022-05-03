@@ -3,6 +3,16 @@ defmodule DTest do
 
   import D
 
+  describe "parse_date/1" do
+    test "parses all sorts of dates" do
+      assert parse_date("Jan 1, 2014") == {2014, 1, 1}
+      assert parse_date("Feb 23, 1979") == {1979, 2, 23}
+      assert parse_date("Mar 12, 1922") == {1922, 3, 12}
+      assert parse_date("Mar 12, 1922") == {1922, 3, 12}
+      assert parse_date("May 2, 1942") == {1942, 5, 2}
+    end
+  end
+
   describe "parse_time/1" do
     test "parses just hour with am/pm" do
       assert parse_time("2pm") == Time.new!(14, 0, 0)
