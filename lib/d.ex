@@ -16,7 +16,7 @@ defmodule D do
   def parse([date_or_time]) do
     cond do
       date?(date_or_time) ->
-        DateTime.new!(parse_date(date_or_time), Time.utc_now())
+        DateTime.new!(parse_date(date_or_time), Time.new!(0, 0, 0, 000000))
 
       time?(date_or_time) ->
         DateTime.new!(Date.utc_today(), parse_time(date_or_time))

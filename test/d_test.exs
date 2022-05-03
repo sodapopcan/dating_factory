@@ -27,6 +27,10 @@ defmodule DTest do
       assert ~d[Apr - 3:33pm] == datetime(now.year, 4, now.day, 15, 33, 0)
     end
 
+    test "date without a time assumes 00:00:00" do
+      assert ~d[Apr 24, 1981] == datetime(1981, 4, 24, 0, 0, 0)
+    end
+
     test "time without a date assumes the current date" do
       now = DateTime.utc_now()
 
