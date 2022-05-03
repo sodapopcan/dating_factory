@@ -5,7 +5,7 @@ defmodule DTest do
 
   def datetime(year, month, day, hour, minute, second) do
     date = Date.new!(year, month, day)
-    time = Time.new!(hour, minute, second, 000000)
+    time = Time.new!(hour, minute, second, 000_000)
 
     DateTime.new!(date, time)
   end
@@ -36,38 +36,40 @@ defmodule DTest do
 
       assert ~d[4:11pm] == datetime(now.year, now.month, now.day, 16, 11, 0)
     end
-  end
 
-  describe "parse_date/1" do
     test "parses all sorts of dates" do
-      assert parse_date("Jan 1, 2014") == Date.new!(2014, 1, 1)
-      assert parse_date("Feb 23, 1979") == Date.new!(1979, 2, 23)
-      assert parse_date("Mar 12, 1922") == Date.new!(1922, 3, 12)
-      assert parse_date("Mar 12, 1922") == Date.new!(1922, 3, 12)
-      assert parse_date("May 2, 1942") == Date.new!(1942, 5, 2)
+      assert ~d[Jan 1, 2014] == datetime(2014, 1, 1, 0, 0, 0)
+      assert ~d[Feb 23, 1979] == datetime(1979, 2, 23, 0, 0, 0)
+      assert ~d[Mar 12, 1922] == datetime(1922, 3, 12, 0, 0, 0)
+      assert ~d[Mar 12, 1922] == datetime(1922, 3, 12, 0, 0, 0)
+      assert ~d[May 2, 1942] == datetime(1942, 5, 2, 0, 0, 0)
     end
 
     test "assumes current year when no year given" do
       now = DateTime.utc_now()
 
-      assert parse_date("Apr 24") == Date.new!(now.year, 4, 24)
+      assert ~d[Apr 24] == datetime(now.year, 4, 24, 0, 0, 0)
     end
   end
 
-  describe "parse_time/1" do
-    test "parses just hour with am/pm" do
-      assert parse_time("2pm") == Time.new!(14, 0, 0, 000000)
-      assert parse_time("11am") == Time.new!(11, 0, 0, 000000)
-    end
+  test "parses just hour with am/pm" do
+    now = Date.utc_today()
 
-    test "parses hour and minutes with am/pm" do
-      assert parse_time("4:04am") == Time.new!(4, 4, 0, 000000)
-      assert parse_time("10:04pm") == Time.new!(22, 4, 0, 000000)
-    end
+    assert ~d[2pm] == datetime(now.year, now.month, now.day, 14, 0, 0)
+    assert ~d[11am] == datetime(now.year, now.month, now.day, 11, 0, 0)
+  end
 
-    test "parses hour, minutes, and seconds with am/pm" do
-      assert parse_time("11:04:56pm") == Time.new!(23, 4, 56, 000000)
-      assert parse_time("11:04:56am") == Time.new!(11, 4, 56, 000000)
-    end
+  test "parses hour and minutes with am/pm" do
+    now = Date.utc_today()
+
+    assert ~d[4:04am] == datetime(now.year, now.month, now.day, 4, 4, 0)
+    assert ~d[10:04pm] == datetime(now.year, now.month, now.day, 22, 4, 0)
+  end
+
+  test "parses hour, minutes, and seconds with am/pm" do
+    now = Date.utc_today()
+
+    assert ~d[11:04:56pm] == datetime(now.year, now.month, now.day, 23, 4, 56)
+    assert ~d[11:04:56am] == datetime(now.year, now.month, now.day, 11, 4, 56)
   end
 end

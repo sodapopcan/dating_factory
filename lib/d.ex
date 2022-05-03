@@ -9,11 +9,12 @@ defmodule D do
     |> parse()
   end
 
-  def parse([date, time]) do
+  defp parse([date, time]) do
     DateTime.new!(parse_date(date), parse_time(time))
   end
 
-  def parse([date_or_time]) do
+  defp parse([date_or_time]) do
+    IO.inspect(date_or_time, label: "date_or_time")
     cond do
       date?(date_or_time) ->
         DateTime.new!(parse_date(date_or_time), Time.new!(0, 0, 0, 000000))
@@ -26,10 +27,10 @@ defmodule D do
     end
   end
 
-  def date?(string), do: string =~ @date
-  def time?(string), do: string =~ @time
+  defp date?(string), do: string =~ @date
+  defp time?(string), do: string =~ @time
 
-  def parse_date(string) do
+  defp parse_date(string) do
     case Regex.run(@date, string, capture: :all_but_first) do
       [month, day, year] ->
         month = parse_month(month)
@@ -69,7 +70,7 @@ defmodule D do
   defp parse_month("Nov"), do: 11
   defp parse_month("Dec"), do: 12
 
-  def parse_time(string) do
+  defp parse_time(string) do
     [hour, minute, second, period] = Regex.run(@time, string, capture: :all_but_first)
     hour = to_integer(hour)
     minute = to_integer(minute)
