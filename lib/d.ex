@@ -6,14 +6,28 @@ defmodule D do
     string
     |> String.replace(~r/\s+/, " ")
     |> String.split(" - ")
-    |> case do
-      [date, time] ->
-        DateTime.new!(parse_date(date), parse_time(time))
+    |> parse()
+  end
 
-      _ ->
-        raise "d'oh"
+  def parse([date, time]) do
+    DateTime.new!(parse_date(date), parse_time(time))
+  end
+
+  def parse([date_or_time]) do
+    cond do
+      date?(date_or_time) ->
+        DateTime.new!(parse_date(date_or_time), Time.utc_now())
+
+      time?(date_or_time) ->
+        DateTime.new!(Date.utc_today(), parse_time(date_or_time))
+
+      true ->
+        raise "Oops"
     end
   end
+
+  def date?(string), do: string =~ @date
+  def time?(string), do: string =~ @time
 
   def parse_date(string) do
     case Regex.run(@date, string, capture: :all_but_first) do
