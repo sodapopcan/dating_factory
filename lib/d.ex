@@ -8,7 +8,7 @@ defmodule D do
     day = to_integer(day)
     year = to_integer(year)
 
-    {year, month, day}
+    Date.new!(year, month, day)
   end
 
   defp parse_month("Jan"), do: 1

@@ -5,11 +5,11 @@ defmodule DTest do
 
   describe "parse_date/1" do
     test "parses all sorts of dates" do
-      assert parse_date("Jan 1, 2014") == {2014, 1, 1}
-      assert parse_date("Feb 23, 1979") == {1979, 2, 23}
-      assert parse_date("Mar 12, 1922") == {1922, 3, 12}
-      assert parse_date("Mar 12, 1922") == {1922, 3, 12}
-      assert parse_date("May 2, 1942") == {1942, 5, 2}
+      assert parse_date("Jan 1, 2014") == Date.new!(2014, 1, 1)
+      assert parse_date("Feb 23, 1979") == Date.new!(1979, 2, 23)
+      assert parse_date("Mar 12, 1922") == Date.new!(1922, 3, 12)
+      assert parse_date("Mar 12, 1922") == Date.new!(1922, 3, 12)
+      assert parse_date("May 2, 1942") == Date.new!(1942, 5, 2)
     end
   end
 
