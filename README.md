@@ -12,7 +12,7 @@ case when I need a full datetime stuct but only care about a portion of
 This is heavily tailored to my own use.  It only supports English, always
 returns a `DateTime` in UTC with microsecond precision, and the string itself
 only specific formats (3-letter months, 12-hour time, and date and time must be
-seaparated by a `-`).
+separated by a `-`).
 
 If there is any interest in extending this lib to be a little more flexible,
 I might be open to that.
