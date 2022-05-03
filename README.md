@@ -45,7 +45,7 @@ iex> ~d[Aug 23] # uses the current year but always at the beginning of the day
 ```elixir
 def deps do
   [
-    {:dating_factory, git:  "https://github.com/sodapopcan/dating_factory.git"}
+    {:dating_factory, git: "https://github.com/sodapopcan/dating_factory.git"}
   ]
 end
 ```
