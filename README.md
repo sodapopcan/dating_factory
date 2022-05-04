@@ -4,10 +4,10 @@ A very simple library for parsing English date strings into `DateTime`s.
 
 ## About
 
-This library exists for my personal using in testing.  I work on personal
-projects where I'm asserting on dates often and for whatever reason, looking at
-ISO dates make my eyes glaze over and give me headaches.  This is especially the
-case when I need a full datetime stuct but only care about a portion of it.
+This library exists for my personal use in testing.  I work on personal projects
+where I'm asserting on dates often and for whatever reason, looking at ISO dates
+make my eyes glaze over and give me headaches.  This is especially the case when
+I need a full datetime stuct but only care about a portion of it.
 
 This is heavily tailored to my own use.  It only supports English, always
 returns a `DateTime` in UTC with microsecond precision, and the string itself
