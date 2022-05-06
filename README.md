@@ -37,10 +37,10 @@ iex> ~d[Apr 24, 1981 - 2pm]
 ~U[1981-04-24 14:00:00.000000Z]
 
 iex> ~d[10:02am] # uses today's date
-~U[2022-05-03 10:02:00.000000Z]
+DateTime.new!(Date.utc_today(), ~T[10:02:00.000000Z])
 
 iex> ~d[Aug 23] # uses the current year but always at the beginning of the day
-~U[2022-08-23 00:00:00.000000Z]
+DateTime.new!(Date.new!(Date.utc_today().year, 08, 23), ~T[00:00:00.000000Z])
 ```
 
 ## Installation
