@@ -75,9 +75,9 @@ defmodule DatingFactoryTest do
   alias DatingFactory.InvalidDateString
 
   test "errors with an unrecognized date string" do
-    message = ~s("invalid date string" is not a recognized date string)
-    assert_raise InvalidDateString, message, fn ->
-      ~d[invalid date string]
-    end
+    error_message = ~s("invalid date string" is not a recognized date string)
+    test_fn = fn -> ~d[invalid date string] end
+
+    assert_raise InvalidDateString, error_message, test_fn
   end
 end
