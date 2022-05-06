@@ -50,25 +50,25 @@ defmodule DatingFactoryTest do
 
     assert ~d[Apr 24] == datetime(now.year, 4, 24, 0, 0, 0)
   end
-end
 
-test "parses just hour with am/pm" do
-  now = Date.utc_today()
+  test "parses just hour with am/pm" do
+    now = Date.utc_today()
 
-  assert ~d[2pm] == datetime(now.year, now.month, now.day, 14, 0, 0)
-  assert ~d[11am] == datetime(now.year, now.month, now.day, 11, 0, 0)
-end
+    assert ~d[2pm] == datetime(now.year, now.month, now.day, 14, 0, 0)
+    assert ~d[11am] == datetime(now.year, now.month, now.day, 11, 0, 0)
+  end
 
-test "parses hour and minutes with am/pm" do
-  now = Date.utc_today()
+  test "parses hour and minutes with am/pm" do
+    now = Date.utc_today()
 
-  assert ~d[4:04am] == datetime(now.year, now.month, now.day, 4, 4, 0)
-  assert ~d[10:04pm] == datetime(now.year, now.month, now.day, 22, 4, 0)
-end
+    assert ~d[4:04am] == datetime(now.year, now.month, now.day, 4, 4, 0)
+    assert ~d[10:04pm] == datetime(now.year, now.month, now.day, 22, 4, 0)
+  end
 
-test "parses hour, minutes, and seconds with am/pm" do
-  now = Date.utc_today()
+  test "parses hour, minutes, and seconds with am/pm" do
+    now = Date.utc_today()
 
-  assert ~d[11:04:56pm] == datetime(now.year, now.month, now.day, 23, 4, 56)
-  assert ~d[11:04:56am] == datetime(now.year, now.month, now.day, 11, 4, 56)
+    assert ~d[11:04:56pm] == datetime(now.year, now.month, now.day, 23, 4, 56)
+    assert ~d[11:04:56am] == datetime(now.year, now.month, now.day, 11, 4, 56)
+  end
 end
