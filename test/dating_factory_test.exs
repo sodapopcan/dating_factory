@@ -71,4 +71,13 @@ defmodule DatingFactoryTest do
     assert ~d[11:04:56pm] == datetime(now.year, now.month, now.day, 23, 4, 56)
     assert ~d[11:04:56am] == datetime(now.year, now.month, now.day, 11, 4, 56)
   end
+
+  alias DatingFactory.InvalidDateString
+
+  test "errors with an unrecognized date string" do
+    message = ~s("invalid date string" is not a recognized date string)
+    assert_raise InvalidDateString, message, fn ->
+      ~d[invalid date string]
+    end
+  end
 end

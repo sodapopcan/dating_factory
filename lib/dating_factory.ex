@@ -6,6 +6,10 @@ defmodule DatingFactory do
   @date ~r/\A(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s?([0-9][0-9]?)?,?\s?([0-9][0-9][0-9][0-9])?/
   @time ~r/\A([0-9][0-9]?):?([0-6][0-9])?:?([0-6][0-9])?(am|pm)/
 
+  defmodule InvalidDateString do
+    defexception [:message]
+  end
+
   @doc """
   Parses an English date string into a DateTime.
 
@@ -42,8 +46,7 @@ defmodule DatingFactory do
         DateTime.new!(Date.utc_today(), parse_time(date_or_time))
 
       true ->
-        # Gotta fix this at some point, but I'm in no rush.
-        raise "Oops"
+        raise InvalidDateString, message: "#{inspect(date_or_time)} is not a recognized date string"
     end
   end
 
