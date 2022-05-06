@@ -12,7 +12,7 @@ when I need a full datetime stuct but only care about a portion of it.
 This is heavily tailored to my own use.  It only supports English, always
 returns a `DateTime` in UTC with microsecond precision, and the string itself
 only supports a specific format (3-letter months, 12-hour time, and date and
-time must be separated by ` - `).
+time must be separated by `-`).
 
 All of this might change, of course.
 
