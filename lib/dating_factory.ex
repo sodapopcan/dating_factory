@@ -74,9 +74,6 @@ defmodule DatingFactory do
         month = parse_month(month)
 
         Date.new!(year, month, day)
-
-      nil ->
-        raise "oops"
     end
   end
 
